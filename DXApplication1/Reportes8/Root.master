@@ -1,0 +1,112 @@
+<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="Root.master.cs" Inherits="Reportes8.RootMaster" %>
+
+<%-- DXCOMMENT: Page Root.master is a master page that contains the root layout (it includes Header, Cental Area, and Footer) --%>
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head runat="server">
+    <meta charset="UTF-8" />
+    <title></title>
+    <link rel="stylesheet" type="text/css" href="Content/Site.css" />
+    <style type="text/css">
+        .auto-style1 {
+            float: left;
+            margin-left: 15px;
+            margin-top: 11px;
+            font-size: x-large;
+            color: #4B4B57;
+        }
+        .auto-style2 {
+            color: #4B4B57;
+        }
+        .auto-style3 {
+            text-decoration: none;
+        }
+    </style>
+</head>
+<body runat="server" id="Body">
+    <form id="form1" runat="server">
+    <dx:ASPxSplitter ID="ASPxSplitter1" runat="server" AllowResize="False" Orientation="Vertical"
+        FullscreenMode="True" SeparatorVisible="False" Height="100%" Width="100%" BackColor="Black">
+        <Styles>
+            <Pane>
+                <Paddings Padding="0px" />
+                <Border BorderWidth="0px" />
+            </Pane>
+        </Styles>
+        <Panes>
+            <dx:SplitterPane Name="Header" AutoHeight="true">
+                <PaneStyle CssClass="headerPane">
+                    <BorderBottom BorderWidth="1px" />
+                </PaneStyle>
+                <ContentCollection>
+                    <dx:SplitterContentControl ID="SplitterContentControl1" runat="server">
+                        <div class="headerTop">
+                            <div class="auto-style1">
+                                <a href="Index.aspx" class="auto-style3"><span class="auto-style2">Security Reports</span></a></div>
+                            <div class="loginControl">
+                                <asp:LoginView ID="HeadLoginView" runat="server" EnableViewState="false">                                   
+                                    <LoggedInTemplate>
+                                        Welcome <span class="bold">
+                                            <asp:LoginName ID="HeadLoginName" runat="server" />
+                                        </span>! [
+                                        <asp:LoginStatus ID="HeadLoginStatus" runat="server" LogoutAction="Redirect" LogoutText="Log Out"
+                                            LogoutPageUrl="~/" />
+                                        ]
+                                    </LoggedInTemplate>
+                                </asp:LoginView>
+                            </div>
+                        </div>
+                        <div class="headerMenu">
+                            <%-- DXCOMMENT: Configure the header menu --%>
+                            <nav>
+                                <ul>
+                                    <li><a href="User.aspx">User</a></li>
+                                    <li><a href="Rols.aspx">Rol</a></li>
+                                    <li><a href="Application.aspx">Application</a></li>
+                                    <li><a href="Permission.aspx">Permission</a></li>
+                                </ul>
+                            </nav>
+                        </div>
+                    </dx:SplitterContentControl>
+                </ContentCollection>
+            </dx:SplitterPane>
+            <dx:SplitterPane Name="Content" MinSize="375px">
+                <PaneStyle CssClass="mainContentPane">
+<BorderBottom BorderWidth="1px"></BorderBottom>
+                </PaneStyle>
+                <ContentCollection>
+                    <dx:SplitterContentControl ID="SplitterContentControl3" runat="server">
+                        <asp:ContentPlaceHolder ID="Content" runat="server">
+                        </asp:ContentPlaceHolder>
+                    </dx:SplitterContentControl>
+                </ContentCollection>
+                <PaneStyle BackColor="white">
+                    <BorderBottom BorderWidth="1px" />
+                </PaneStyle>
+            </dx:SplitterPane>
+
+            <dx:SplitterPane Name="Footer" Size="125px" PaneStyle-CssClass="footerPane">
+<PaneStyle CssClass="footerPane"></PaneStyle>
+                <ContentCollection>
+                    <dx:SplitterContentControl ID="SplitterContentControl4" runat="server">
+                        <div class="footerMenu">
+                            
+                        </div>
+                        <div class="copyright">
+                            <dx:ASPxLabel ID="ASPxLabel2" runat="server">
+                            </dx:ASPxLabel>
+                        </div>
+                    </dx:SplitterContentControl>
+                </ContentCollection>
+            </dx:SplitterPane>
+        </Panes>
+    </dx:ASPxSplitter>
+    
+<%-- DXCOMMENT: Configure a datasource for the header menu --%>
+<asp:XmlDataSource ID="XmlDataSourceHeader" runat="server" DataFile="~/App_Data/TopMenu.xml"
+    XPath="/items/*" OnTransforming="XmlDataSourceHeader_Transforming"></asp:XmlDataSource>
+
+    
+    </form>
+</body>
+</html>
